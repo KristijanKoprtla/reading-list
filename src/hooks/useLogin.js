@@ -2,16 +2,16 @@ import { useState } from "react";
 
 //firebase imports
 import { auth } from "../firebase/config";
-import { createUserWithEmailAndPassword } from "firebase/auth";
+import { signInWithEmailAndPassword } from "firebase/auth";
 
-export const useSignup = () => {
+export const useLogin = () => {
     const [error, setError] = useState(null)
 
-    const signup = (email, password) => {
+    const login = (email, password) => {
         setError(null)
-        createUserWithEmailAndPassword(auth, email, password)
+        signInWithEmailAndPassword(auth, email, password)
             .then((res) => {
-                console.log('user signed up:', res.user);
+                console.log('user logged in:', res.user);
             })
             .catch((err) => {
                 setError(err.message);
@@ -19,5 +19,5 @@ export const useSignup = () => {
 
     }
 
-    return { error, signup }
+    return { error, login }
 }
